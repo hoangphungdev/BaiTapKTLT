@@ -14,6 +14,20 @@ public:
         this->y = y;
     }
 
+    double getX()
+    {
+        return x;
+    }
+    double getY()
+    {
+        return y;
+    }
+
+    void printPoint()
+    {
+        cout << this->getX() << " " << this->getY() << endl;
+    }
+
     bool equals(Point *p)
     {
         return (this->x == p->x) && (this->y == p->y);

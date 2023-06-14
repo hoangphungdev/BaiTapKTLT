@@ -71,21 +71,21 @@ int main()
     vector<TimeExpandedNode *> tempTENs;
     allTENs.push_back(tempTENs);
 
-    ifstream input("C:\\Users\\Admin\\Downloads\\AllParts.txt");
+    ifstream input("AllParts.txt");
     input.is_open();
 
     while (!input.eof())
     {
         string str;
         getline(input, str);
-        if (strSmatch(str, "[A-Z0-9]+(?= )") == "")
+        if (strSmatch(str, "[_A-Z0-9]+(?= )") == "")
             break;
         Shape *shape = new Shape();
 
         shape->setName(strSmatch(str, "[A-Z0-9]+(?= )"));
 
-        string point_1 = strSmatch(str, "[^_ ][-0-9.,]+(?=_)");
-        string point_2 = strSmatch(str, "[^_ ][-0-9.,]+(?=$)");
+        string point_1 = strSmatch(str, "[_][-0-9.,]+(?=_)");
+        string point_2 = strSmatch(str, "[^_A-Z ][-0-9.,]+(?=$)");
 
         string s1 = "[^_ ][-0-9.,]+(?=,)";
         string s2 = "[^_,][-0-9.]+(?=$)";
@@ -139,7 +139,6 @@ int main()
 
     for (TimeExpandedNode *nA : allTENs.at(0))
     {
-
         for (TimeExpandedNode *nB : allTENs.at(0))
         {
             vector<pair<int, int>> nA_to_nB;
