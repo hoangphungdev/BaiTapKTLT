@@ -73,6 +73,7 @@ int main()
 
     ifstream input("AllParts.txt");
     input.is_open();
+    int counter = 0;
 
     while (!input.eof())
     {
@@ -82,7 +83,7 @@ int main()
             break;
         Shape *shape = new Shape();
 
-        shape->setName(strSmatch(str, "[A-Z0-9]+(?= )"));
+        shape->setName(strSmatch(str, "[_A-Z0-9]+(?= )"));
 
         string point_1 = strSmatch(str, "[_][-0-9.,]+(?=_)");
         string point_2 = strSmatch(str, "[^_A-Z ][-0-9.,]+(?=$)");
@@ -136,6 +137,8 @@ int main()
             }
         }
     }
+    cout << "End of first nested-for loops" << endl;
+    cout << "allTENs.at(0).size( ) = " << allTENs.at(0).size() << endl;
 
     for (TimeExpandedNode *nA : allTENs.at(0))
     {
@@ -145,12 +148,25 @@ int main()
             vector<pair<int, int>> nB_to_nA;
             if (!nA->equals(nB))
             {
-                nA_to_nB = getConcidences(&(nA->srcs), &(nB->tgts));
-                nB_to_nA = getConcidences(&(nB->srcs), &(nA->tgts));
-                nA->insertSourcesAndTargets(nB, nA_to_nB, nB_to_nA);
+                counter++;
+                // cout<<//"A("<<nA->origin->x<<", "<<nA->origin->y<<") to ("<<nB->origin->x<<", "<<nB->origin->y<<") "<<
+                //         counter<<endl;
+                if ( // counter == 105875 ||
+                     // counter == 220553 //||
+                    counter % (10 * 1000 * 1000) == 0
+                    // counter == 67116
+                )
+                {
+                    // cout<<"BDEUG"<<endl;
+                    cout << counter << endl;
+                }
+                nB_to_nA = getConcidences(&(nA->srcs), &(nB->tgts));
+                nA_to_nB = getConcidences(&(nB->srcs), &(nA->tgts));
+                nA->insertSourcesAndTargets(nB, nB_to_nA, nA_to_nB);
             }
         }
     }
+    cout << "End of second nested-for loop" << endl;
 
     for (Point *p : P)
     {
@@ -165,6 +181,7 @@ int main()
         assert(i = 1);
         // mọi point chỉ xuất hiện một lần trong tất cả các trường origin của tất cả các TENode
     }
+    cout << "End of third nested-for loop" << endl;
 
     for (Shape *s : S)
     {
@@ -194,6 +211,7 @@ int main()
         assert(i = 2);
         // Mọi shape chỉ xuất hiện hai lần trong tất cả các trường srcs và tgts của tất cả các TENode.
     }
+    cout << "End of forth nested-for loop" << endl;
 
     for (TimeExpandedNode *n : allTENs.at(0))
     {
@@ -217,4 +235,5 @@ int main()
         // Nếu phần tử n có tổng độ dài của srcs và tgts của nó là X. Thì số lần xuất hiện của n trong các vector
         // srcs và tgts của các TENodes khác cũng sẽ bằng đúng X
     }
+    cout << "End of fifth nested-for loop" << endl;
 }

@@ -56,27 +56,27 @@ public:
         {
             int atN = fromN.at(i).first;
             int toThis = fromN.at(i).second;
-            if (this->srcs.at(toThis).first == nullptr)
+            if (this->srcs.at(atN).first == nullptr)
             {
-                this->srcs.at(toThis).first = n;
+                this->srcs.at(atN).first = n;
             }
-            if (n->tgts.at(atN).first == nullptr)
+            if (n->tgts.at(toThis).first == nullptr)
             {
-                n->tgts.at(atN).first = this;
+                n->tgts.at(toThis).first = this;
             }
         }
 
         for (int i = 0; i < toN.size(); i++)
         {
-            int atThis = toN.at(i).first;
+            int atN = toN.at(i).first;
             int fromThis = toN.at(i).second;
-            if (this->tgts.at(atThis).first == nullptr)
+            if (this->tgts.at(fromThis).first == nullptr)
             {
-                this->tgts.at(atThis).first = n;
+                this->tgts.at(fromThis).first = n;
             }
-            if (n->srcs.at(fromThis).first == nullptr)
+            if (n->srcs.at(atN).first == nullptr)
             {
-                n->srcs.at(fromThis).first = this;
+                n->srcs.at(atN).first = this;
             }
         }
     }
