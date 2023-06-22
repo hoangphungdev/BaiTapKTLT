@@ -4,6 +4,7 @@
 #include "Shape.cpp"
 #include <vector>
 #include <utility>
+#include <queue>
 using namespace std;
 
 class TimeExpandedNode
@@ -11,9 +12,40 @@ class TimeExpandedNode
 public:
     vector<pair<TimeExpandedNode *, Shape *>> srcs;
     Point *origin;
-    double time;
+    double time = 0;
     int layer;
     vector<pair<TimeExpandedNode *, Shape *>> tgts;
+
+    TimeExpandedNode() {}
+    TimeExpandedNode(Point *origin, double time,
+                     vector<pair<TimeExpandedNode *, Shape *>> tgts)
+    {
+        this->origin = origin;
+        this->time = time;
+        for (auto it : tgts)
+        {
+            this->tgts.push_back(it);
+        }
+    }
+
+    int indexInSources(Shape *s)
+    {
+        int index = 0;
+        bool found = false;
+        for (auto it : tgts)
+        {
+            Shape *shape = it.second;
+            if (shape->equals(s))
+            {
+                found = true;
+                return index;
+            }
+            index++;
+        }
+        if (!found)
+            return -1;
+        return index;
+    }
 
     void setTENode(Point *point)
     {

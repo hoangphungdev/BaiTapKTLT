@@ -93,11 +93,11 @@ int main()
         string s3 = "[^_,][-0-9.]+(?=$)";
 
         Point *firstPoint = new Point();
-        firstPoint->setPoint(std::stof(strSmatch(point_1, s1)),
-                             std::stof(strSmatch(point_1, s2)));
+        firstPoint->setPoint(stof(strSmatch(point_1, s1)),
+                             stof(strSmatch(point_1, s2)));
         Point *lastPoint = new Point();
-        lastPoint->setPoint(std::stof(strSmatch(point_2, s1)),
-                            std::stof(strSmatch(point_2, s3)));
+        lastPoint->setPoint(stof(strSmatch(point_2, s1)),
+                            stof(strSmatch(point_2, s3)));
 
         shape->setPoint(firstPoint, lastPoint);
 
